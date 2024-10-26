@@ -3,7 +3,7 @@ import { AppContext } from "../../context/AppContext";
 import { useContext } from "react";
 import { Expense } from "../../types/types";
 
-const ExpenseList = () => {
+export const ExpenseList = () => {
   const { expenses } = useContext(AppContext);
 
   return (

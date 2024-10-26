@@ -1,12 +1,37 @@
 import React, { useState } from "react";
-const AddExpenseForm = () => {
-  // Exercise: Consume the AppContext here
+import { AppContext } from "../../context/AppContext";
+import { useContext } from "react";
+import { Expense} from "../../types/types";
+import {v4 as uuidv4 } from "uuid";
 
-  // Exercise: Create name and cost to state variables
+
+export const AddExpenseForm = () => {
+
+  // Exercise: Consume the AppContext here
+  
+    const { expenses, setExpenses } = useContext(AppContext);
+
+    const initialExpense = 
+      {   id: uuidv4(),
+          name: "",
+          cost: 0,
+      };
+    
+
+    const [createExpense, setCreateExpense] = useState(initialExpense);
+
+
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const newExpense = {
+      ...createExpense,
+    };
 
+    setExpenses((expenses) => [...expenses, newExpense]);
+
+    setCreateExpense(initialExpense);
+    
     // Exercise: Add add new expense to expenses context array
   };
 
@@ -20,7 +45,10 @@ const AddExpenseForm = () => {
             type="text"
             className="form-control"
             id="name"
-            value={""}
+            value={createExpense.name}
+            onChange={(event) =>
+              setCreateExpense({...createExpense, name:event.target.value})
+            }
             // HINT: onChange={}
           ></input>
         </div>
@@ -28,10 +56,13 @@ const AddExpenseForm = () => {
           <label htmlFor="cost">Cost</label>
           <input
             required
-            type="text"
+            type="number"
             className="form-control"
             id="cost"
-            value={0}
+            value={createExpense.cost}
+            onChange={(event) =>
+              setCreateExpense({...createExpense, cost:parseFloat(event.target.value)})
+            }
             // HINT: onChange={}
           ></input>
         </div>
