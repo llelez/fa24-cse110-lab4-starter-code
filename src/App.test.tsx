@@ -37,16 +37,17 @@ const createExpenseButton = screen.getByText("Save");
 
   const newExpenseName = screen.getByText("apple");
   const newExpenseCost = screen.getByText("$300");
-  // const totalBudgetText = screen.getByText(/Budget: \$/i);
+  const totalBudgetText = screen.getByText(/Budget: \$/i);
   const remainingText = screen.getByText(/Remaining: \$/i);
   const spentSoFarText = screen.getByText(/Spent so far: \$/i);
 
   // const totalBudget = parseInt(totalBudgetText.textContent?.replace(/[^0-9]/g, "") || "0", 10);
   const remainingNumber = parseInt(remainingText.textContent?.replace(/[^0-9]/g, "") || "0", 10);
   const spentSoFarNumber = parseInt(spentSoFarText.textContent?.replace(/[^0-9]/g, "") || "0", 10);
-
+  const totalBudget = parseInt(totalBudgetText.textContent?.replace(/[^0-9]/g, "") || "0", 10);
+ 
   expect (300).toBe(spentSoFarNumber);
-  expect(3700).toBe(remainingNumber);
+  expect(totalBudget-300).toBe(remainingNumber);
 
 
 })
