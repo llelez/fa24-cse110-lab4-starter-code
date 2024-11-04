@@ -47,6 +47,8 @@ const createExpenseButton = screen.getByText("Save");
   const totalBudget = parseInt(totalBudgetText.textContent?.replace(/[^0-9]/g, "") || "0", 10);
  
   expect (300).toBe(spentSoFarNumber);
+  // expect (0).toBe(spentSoFarNumber);
+
   expect(totalBudget-300).toBe(remainingNumber);
 
 
